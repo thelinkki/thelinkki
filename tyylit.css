@@ -3,7 +3,6 @@ main {
     padding: 0vw;
     margin: 0px;
     color: white;
-    align-items: center;
     align-content: center;
     align-items: center;
     text-align: center;
@@ -27,6 +26,13 @@ body {
     font-size: 40px;
 
 }
+
+
+#qrcode {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+  }
 
 .container {
 

@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#303031" />
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="qrcode.js"></script>
 <link href="tyylit.css" rel="StyleSheet" type="text/css" />
 <title>Linkki</title>
 
@@ -26,7 +28,10 @@
         <p><img src="menu.png"</p>
       </div>
       <p id="countdown" ></p>
-      <p><img width="50%" src="qr.png"</p>
+      <!--<p><img width="50%" src="qr.png"</p>--> 
+
+      <div id="qrcode"></div>
+
       <p  id="now" ></p>
       
       
@@ -40,13 +45,15 @@
 
 
 <script>
+
+var today = new Date();
 var countDownTime = 3000000;
 var elapsedTime = 0;
+var datestamp = today.getFullYear() + padLeadingZeros((today.getMonth()+1),2) + padLeadingZeros(today.getDate(),2);
+var timestamp = datestamp + padLeadingZeros(today.getHours(),2) + padLeadingZeros(today.getMinutes(),2) + padLeadingZeros(today.getSeconds(),2);
 
 var x = setInterval(function() {
-
-  var today = new Date();
-  
+  today = new Date();
   elapsedTime = elapsedTime + 1000;
   var distance = countDownTime - elapsedTime;
 
@@ -59,15 +66,34 @@ var x = setInterval(function() {
 
   document.getElementById("countdown").innerHTML = "00:" + padLeadingZeros(cminutes,2) + ":" + padLeadingZeros(cseconds,2);
   document.getElementById("now").innerHTML = dateTime;
-
 }, 1000);
+
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
+}
 
 function padLeadingZeros(num, size) {
     var s = num+"";
     while (s.length < size) s = "0" + s;
     return s;
 }
+new QRCode(document.getElementById("qrcode"), {
+    text: makeid(10)+":"+makeid(10)+":A-vyöhyke, kertalippu, aikuinen:" + timestamp.toString() + ":" + (Number(timestamp)+10000).toString() + ":" + makeid(10) + "/" + makeid(10) + "+" + makeid(10) + "+" + makeid(10) + "==:iqt",
+    width: 360,
+    height: 360
+} 
+
+
+);
 </script>
+
 
 </body>
 </html>
