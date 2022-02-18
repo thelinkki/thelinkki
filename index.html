@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#303031" />
+<link href="tyylit.css" rel="StyleSheet" type="text/css" />
+<title>Linkki</title>
+
+</head>
+
+<body>
+
+  <header>
+      <p><img src="topbaricon.png"</p>
+      <p>Ostot</p>
+      <p>    </p>
+
+  </header>
+
+  <main>
+    <div class=container>
+      <div class="flex-container">
+        <p><img src="icon.png"</p>
+        <p class="specialitem">A-vyöhyke, kertalippu, aikuinen</p>
+        <p><img src="menu.png"</p>
+      </div>
+      <p id="countdown" ></p>
+      <p><img width="50%" src="qr.png"</p>
+      <p  id="now" ></p>
+      
+      
+    </div>
+    <p><img class="button" src="ostohistoria.png"</p>
+  </main>
+
+ <p><img class="bottom" src="bottombar.png"</p>
+
+
+
+
+<script>
+var countDownTime = 3000000;
+var elapsedTime = 0;
+
+var x = setInterval(function() {
+
+  var today = new Date();
+  
+  elapsedTime = elapsedTime + 1000;
+  var distance = countDownTime - elapsedTime;
+
+  var cminutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var cseconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  var date = today.getDate()+"."+(today.getMonth()+1)+"."+today.getFullYear();
+  var time = today.getHours() + "." + padLeadingZeros(today.getMinutes(),2) + "." + padLeadingZeros(today.getSeconds(),2);
+  var dateTime = date+' klo '+time;
+
+  document.getElementById("countdown").innerHTML = "00:" + padLeadingZeros(cminutes,2) + ":" + padLeadingZeros(cseconds,2);
+  document.getElementById("now").innerHTML = dateTime;
+
+}, 1000);
+
+function padLeadingZeros(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+</script>
+
+</body>
+</html>
